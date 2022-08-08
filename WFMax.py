@@ -12,6 +12,9 @@ import os
 root = tk.Tk()
 apps = []
 
+root.geometry("700x800")
+root.resizable(False,False)
+
 if os.path.isfile('save.txt'):
     with open('save.txt', 'r') as f:
         tempApps = f.read()
@@ -46,29 +49,30 @@ def runApps():
 bg = PhotoImage(file="background.gif")
 
 # create a canvas that sets the dimensions of the application itself
-canvas = tk.Canvas(root, height=700, width=700, bg='white')
+canvas = tk.Canvas(root, height=700, width=700)
 # this is where I assigned the value of the bg to the canvas background
-canvas.create_image(20,20,anchor=NW, image = bg)
+canvas.create_image(0,0,anchor=NW, image = bg)
 canvas.pack()
 
 # this is the part of the GUI where I would display the app names, so I just made a frame and attached to root
 frame = tk.Canvas(root, bg="white")
+frame.create_image(0,0,anchor=NW, image = bg)
 # I set the relative distance from top and bottom using relx, rely, relwidth, and relheight
 # relheight and relwidth were 80% of the actual canvase size
 # relx and rely were the distances from the top, bottom, left, and right of the canvas
 frame.place(relwidth=0.8, relheight=0.8, relx = 0.1, rely = 0.1)
 
 # i made an 'open file' button which referenced a method called addApp
-openFile = tk.Button(root, text="Open File", padx=10, pady=5, fg="white", bg="#263D42", command=addApp)
+openFile = tk.Button(root, text="Open File", padx=100, pady=5, bg="black", fg="white", command=addApp)
 openFile.pack()
 
 # i made an 'run apps' button which referenced a method called runApps
-runApps = tk.Button(root, text="Run Apps", padx=10, pady=5, fg="white", bg="#263D42", command=runApps)
+runApps = tk.Button(root, text="Run Apps", padx=100, pady=5, bg="black", fg="white", command=runApps)
 runApps.pack()
 
 
 for app in apps:
-    label = tk.Label(frame, text=app)
+    label = tk.Label(frame, text=app, padx=200, fg="white", bg="black")
     label.pack()
 
 # in order to run our application
