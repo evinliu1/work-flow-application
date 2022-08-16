@@ -21,6 +21,13 @@ if os.path.isfile('save.txt'):
         tempApps = tempApps.split(',')
         apps = [x for x in tempApps if x.strip()]
         
+def deletePaths():
+    for widget in frame.winfo_children():
+        widget.destroy()
+
+    apps.clear()
+
+    
 
 def addApp():
     
@@ -49,7 +56,7 @@ def runApps():
 bg = PhotoImage(file="background.gif")
 
 # create a canvas that sets the dimensions of the application itself
-canvas = tk.Canvas(root, height=700, width=700)
+canvas = tk.Canvas(root, height=600, width=800)
 # this is where I assigned the value of the bg to the canvas background
 canvas.create_image(0,0,anchor=NW, image = bg)
 canvas.pack()
@@ -64,11 +71,18 @@ frame.place(relwidth=0.8, relheight=0.8, relx = 0.1, rely = 0.1)
 
 # i made an 'open file' button which referenced a method called addApp
 openFile = tk.Button(root, text="Open File", padx=100, pady=5, bg="black", fg="white", command=addApp)
+openFile.config(width=10)
 openFile.pack()
 
 # i made an 'run apps' button which referenced a method called runApps
 runApps = tk.Button(root, text="Run Apps", padx=100, pady=5, bg="black", fg="white", command=runApps)
 runApps.pack()
+runApps.config(width=10)
+
+# i made a 'delete path' button which referenced a method called deletePaths
+deletePath = tk.Button(root, text="Clear Paths", padx=100, pady=5, bg="black", fg="white", command=deletePaths)
+deletePath.pack()
+deletePath.config(width=10)
 
 
 for app in apps:
